@@ -5,8 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class buku extends Model
+class Buku extends Model
 {
     use HasFactory;
-    protected $table:'buku';
+
+    protected $table = 'buku';
+
+    protected $casts = [
+        'tgl_terbit' => 'datetime'
+    ];
+
 }

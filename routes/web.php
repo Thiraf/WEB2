@@ -1,40 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PerumahanController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\BukuController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', [TestController::class, 'beranda']);
+Route::get('/about', [TestController::class, 'about']);
+Route::get('/index', [TestController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//* PERTEMUAN 4
 
-Route::get('/about', function () {
-    return view('about',[
-        "name" => "Revontheus",
-        "email"=> "Revontheus@gmail.com"
-    ]);
-});
+Route::get('/boom', [TestController::class, 'boomesport']);
+Route::get('/prx', [TestController::class, 'prxesport']);
+Route::get('/fnatic', [TestController::class, 'fnaticesport']);
+Route::get('/fpx', [TestController::class, 'fpxesport']);
 
 
-Route::get('/perumahan',[PerumahanController::class, 'index']);
-// Route::get('/perumahan','postController2@index');
-// Route::resource('perumahan',\App\Http\Controllers\PerumahanController::class );
+//* PERTEMUAN 5
 
-
-// // Laravel 7
-// Route::get('/buku',['BukuController@index']);
-
-
-//Laravel 10
-Route::get('/buku',[BukuController::class, 'index']);
-
+// Route::get('/buku', 'BukuController@index'); LARAVEL 7
+Route::get('/buku', [BukuController::class, 'index']);

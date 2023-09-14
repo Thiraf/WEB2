@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PerumahanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,17 @@ Route::get('/about', function () {
         "email"=> "Revontheus@gmail.com"
     ]);
 });
+
+
+Route::get('/perumahan',[PerumahanController::class, 'index']);
+// Route::get('/perumahan','postController2@index');
+// Route::resource('perumahan',\App\Http\Controllers\PerumahanController::class );
+
+
+// // Laravel 7
+// Route::get('/buku',['BukuController@index']);
+
+
+//Laravel 10
+Route::get('/buku',[BukuController::class, 'index']);
+

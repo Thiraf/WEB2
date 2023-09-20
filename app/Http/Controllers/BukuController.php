@@ -16,4 +16,20 @@ class BukuController extends Controller
         $total = Buku::sum('harga');
         return view('buku.index', compact('data_buku', 'no', 'count', 'total'));
     }
+    
+    public function create(){
+        return view('buku.create');
+    }
+    
+    public function store(Request $request)
+    {
+        //
+        $buku = new Buku;
+        $buku->judul = $request->judul;
+        $buku->penulis = $request->penulis;
+        $buku->harga = $request->harga;
+        $buku->tgl_terbit = $request->tgl_terbit;
+        $buku->save();
+        return redirect('/buku');
+    }
 }

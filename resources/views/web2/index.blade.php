@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>Halaman Index</h1>
+    <p align="right"><a href="{{route('buku.create')}}">Tambah Buku</a></p>
 </body>
 </html>

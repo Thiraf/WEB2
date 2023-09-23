@@ -16,7 +16,7 @@ class BukuController extends Controller
         $total = Buku::sum('harga');
         return view('buku.index', compact('data_buku', 'no', 'count', 'total'));
     }
-    
+    // Fungsion Create
     public function create(){
         return view('buku.create');
     }
@@ -30,6 +30,25 @@ class BukuController extends Controller
         $buku->harga = $request->harga;
         $buku->tgl_terbit = $request->tgl_terbit;
         $buku->save();
+        return redirect('/buku');
+    }
+    public function destroy($id){
+        $buku =  Buku::find($id);
+        $buku->delete();
+        return redirect('/buku');
+    }
+    public function edit($id) {
+        $buku = Buku::find($id);
+        return view('buku.edit', compact('buku'));
+    }
+    public function update(Request $request, $id){
+        $buku = Buku::find($id);
+        $buku->update([
+            'judul' => $request->judul,
+            'penulis' => $request->penulis,
+            'harga' => $request->harga,
+            'tgl_terbit' => $request->tgl_terbit,
+        ]);
         return redirect('/buku');
     }
 }

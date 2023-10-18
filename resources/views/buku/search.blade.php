@@ -12,24 +12,12 @@
 <div class="container" style="margin-top: 16px">
     <div class="col-md-12">
 
-
-        @if(session('pesan'))
-            <div class="alert alert-success" id="pesan">
-                {{ session('pesan') }}
-            </div>
-            <script type="text/javascript">
-                // Setelah 2 detik, hapus pesan notifikasi
-                setTimeout(function(){
-                    document.getElementById('pesan').style.display = 'none';
-                }, 3000); // 2000 milidetik = 2 detik
-            </script>
-        @endif
-        <!-- @if(Session::has('pesan'))
-            <div class="alert alert-success">{{Session::get('pesan')}}</div>
-        @endif -->
+        @if(count($data_buku))
+            <div class="alert alert-success">Ditemukan <strong>{{ count($data_buku) }}</strong>
+            data dengan kata: <strong>{{ $cari }}</strong></div>
 
         <div class="card">
-            <div class="card-header text-center" style="background-color: #0B5ED7; color: white"><h2>Daftar Buku</h2></div>
+            <div class="card-header text-center" style="background-color: #0B5ED7; color: white"><h3>Daftar Buku</h3></div>
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <a style="left: right; margin-bottom: 16px" href="{{ route('buku.create') }}">
@@ -40,7 +28,7 @@
                         <input type="text" name="kata" class="form form-control" placeholder="Cari ..." style="float:right;">
                     </form>
                 </div>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>id</th>
@@ -61,11 +49,11 @@
                                 <td>{{ ($buku->tgl_terbit)->format('d/m/Y') }}</td>
                                 <td>
                                     <div class="btn-group" role="group" style="overflow-x: auto;">
-                                        <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>&nbsp;Edit</a>
+                                        <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                         &nbsp;
                                         <form action="{{ route('buku.destroy', $buku->id) }}" method="POST">
                                             @csrf
-                                            <button class="btn btn-danger" onClick="return confirm('Are you sure?')"><i class="fas fa-trash"></i>&nbsp;Hapus</button>
+                                            <button class="btn btn-danger" onClick="return confirm('Are you sure?')"><i class="fas fa-trash"></i>Hapus</button>
                                         </form>
                                     </div>
                                 </td>
@@ -74,11 +62,16 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div>{{ $data_buku->links('vendor.pagination.bootstrap-5') }}</div>
-                <div><strong>Jumlah Buku : {{ $jumlah_buku }}</strong></div>
-                <div><strong>Jumlah Harga Buku : {{ "Rp ".number_format($jumlah_harga, 0, ',', '.') }}</strong></div>
+                <div>{{ $data_buku->links() }}</div>
             </div>
         </div>
+        @else
+            <div class="alert alert-warning">
+                <h4>Data {{ $cari }} tidak ditemukan</h4>
+                <a href="/buku" class="btn btn-warning">Kembali</a>
+            </div>
+        @endif
+    
     </div>
 </body>
 </html>

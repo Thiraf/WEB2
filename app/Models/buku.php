@@ -15,4 +15,14 @@ class Buku extends Model
         'tgl_terbit' => 'datetime'
     ];
 
+    protected $dates = ['tgl_terbit'];
+
+    // * MEMBERI FILLABLE AGAR DAPAT DI UPDATE
+    protected $fillable = [
+        'judul',
+        'penulis',
+        'harga',
+        'tgl_terbit'
+    ];
+
 }
